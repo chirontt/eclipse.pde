@@ -149,7 +149,7 @@ public class ProductIntroOperation extends BaseManifestOperation implements IVar
 		implementation.setName("implementation"); //$NON-NLS-1$
 		implementation.setAttribute("kind", "html"); //$NON-NLS-1$ //$NON-NLS-2$
 		implementation.setAttribute("style", "content/shared.css"); //$NON-NLS-1$ //$NON-NLS-2$
-		implementation.setAttribute("os", "win32,linux,macosx"); //$NON-NLS-1$ //$NON-NLS-2$
+		implementation.setAttribute("os", "win32,linux,freebsd,macosx"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		presentation.add(implementation);
 

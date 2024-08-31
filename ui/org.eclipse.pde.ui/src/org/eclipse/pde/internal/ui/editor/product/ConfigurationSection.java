@@ -69,8 +69,8 @@ public class ConfigurationSection extends PDESection {
 	private FormEntry fCustomEntry;
 	private boolean fBlockChanges;
 
-	private static final String[] TAB_LABELS = { "linux", "macosx", "win32" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-	private static final String[] TAB_OS = { Platform.OS_LINUX, Platform.OS_MACOSX, Platform.OS_WIN32 };
+	private static final String[] TAB_LABELS = { "linux", "freebsd", "macosx", "win32" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	private static final String[] TAB_OS = { Platform.OS_LINUX, Platform.OS_FREEBSD, Platform.OS_MACOSX, Platform.OS_WIN32 };
 
 	private CTabFolder fTabFolder;
 	private int fLastTab;
