@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  Copyright (c) 2005, 2018 IBM Corporation and others.
+ *  Copyright (c) 2005, 2024 IBM Corporation and others.
  *
  *  This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License 2.0
@@ -24,12 +24,14 @@ public class ArgumentsInfo extends ProductObject implements IArgumentsInfo {
 
 	private static final long serialVersionUID = 1L;
 	private final String[] fProgramArgs = new String[8];
+	private final String[] fProgramArgsFre = new String[8];
 	private final String[] fProgramArgsLin = new String[8];
 	private final String[] fProgramArgsMac = new String[8];
 	private final String[] fProgramArgsSol = new String[8];
 	private final String[] fProgramArgsWin = new String[8];
 
 	private final String[] fVMArgs = new String[8];
+	private final String[] fVMArgsFre = new String[8];
 	private final String[] fVMArgsLin = new String[8];
 	private final String[] fVMArgsMac = new String[8];
 	private final String[] fVMArgsSol = new String[8];
@@ -38,11 +40,13 @@ public class ArgumentsInfo extends ProductObject implements IArgumentsInfo {
 	public ArgumentsInfo(IProductModel model) {
 		super(model);
 		this.initializeArgs(fProgramArgs);
+		this.initializeArgs(fProgramArgsFre);
 		this.initializeArgs(fProgramArgsLin);
 		this.initializeArgs(fProgramArgsMac);
 		this.initializeArgs(fProgramArgsSol);
 		this.initializeArgs(fProgramArgsWin);
 		this.initializeArgs(fVMArgs);
+		this.initializeArgs(fVMArgsFre);
 		this.initializeArgs(fVMArgsLin);
 		this.initializeArgs(fVMArgsMac);
 		this.initializeArgs(fVMArgsSol);
@@ -72,6 +76,13 @@ public class ArgumentsInfo extends ProductObject implements IArgumentsInfo {
 				fProgramArgs[arch] = args;
 				if (isEditable()) {
 					firePropertyChanged(P_PROG_ARGS, old, fProgramArgs[arch]);
+				}
+				break;
+			case L_ARGS_FREEBSD :
+				old = fProgramArgsFre[arch];
+				fProgramArgsFre[arch] = args;
+				if (isEditable()) {
+					firePropertyChanged(P_PROG_ARGS_FRE, old, fProgramArgsFre[arch]);
 				}
 				break;
 			case L_ARGS_LINUX :
@@ -108,6 +119,8 @@ public class ArgumentsInfo extends ProductObject implements IArgumentsInfo {
 		switch (platform) {
 			case L_ARGS_ALL :
 				return fProgramArgs[arch];
+			case L_ARGS_FREEBSD :
+				return fProgramArgsFre[arch];
 			case L_ARGS_LINUX :
 				return fProgramArgsLin[arch];
 			case L_ARGS_MACOS :
@@ -139,6 +152,9 @@ public class ArgumentsInfo extends ProductObject implements IArgumentsInfo {
 		if (Platform.OS_WIN32.equals(os)) {
 			archArgs = archIndex > 0 ? getProgramArguments(L_ARGS_WIN32, archIndex) + " " + archArgsAllPlatforms : archArgsAllPlatforms; //$NON-NLS-1$
 			return getCompleteArgs(archArgs, getProgramArguments(L_ARGS_WIN32), fProgramArgs[L_ARGS_ARCH_ALL]);
+		} else if (Platform.OS_FREEBSD.equals(os)) {
+			archArgs = archIndex > 0 ? getProgramArguments(L_ARGS_FREEBSD, archIndex) + " " + archArgsAllPlatforms : archArgsAllPlatforms; //$NON-NLS-1$
+			return getCompleteArgs(archArgs, getProgramArguments(L_ARGS_FREEBSD), fProgramArgs[L_ARGS_ARCH_ALL]);
 		} else if (Platform.OS_LINUX.equals(os)) {
 			archArgs = archIndex > 0 ? getProgramArguments(L_ARGS_LINUX, archIndex) + " " + archArgsAllPlatforms : archArgsAllPlatforms; //$NON-NLS-1$
 			return getCompleteArgs(archArgs, getProgramArguments(L_ARGS_LINUX), fProgramArgs[L_ARGS_ARCH_ALL]);
@@ -167,6 +183,13 @@ public class ArgumentsInfo extends ProductObject implements IArgumentsInfo {
 				fVMArgs[arch] = args;
 				if (isEditable()) {
 					firePropertyChanged(P_VM_ARGS, old, fVMArgs[arch]);
+				}
+				break;
+			case L_ARGS_FREEBSD :
+				old = fVMArgsFre[arch];
+				fVMArgsFre[arch] = args;
+				if (isEditable()) {
+					firePropertyChanged(P_VM_ARGS_FRE, old, fVMArgsFre[arch]);
 				}
 				break;
 			case L_ARGS_LINUX :
@@ -203,6 +226,8 @@ public class ArgumentsInfo extends ProductObject implements IArgumentsInfo {
 		switch (platform) {
 			case L_ARGS_ALL :
 				return fVMArgs[arch];
+			case L_ARGS_FREEBSD :
+				return fVMArgsFre[arch];
 			case L_ARGS_LINUX :
 				return fVMArgsLin[arch];
 			case L_ARGS_MACOS :
@@ -235,6 +260,9 @@ public class ArgumentsInfo extends ProductObject implements IArgumentsInfo {
 		if (Platform.OS_WIN32.equals(os)) {
 			archArgs = archIndex > 0 ? getVMArguments(L_ARGS_WIN32, archIndex) + " " + archArgsAllPlatforms : archArgsAllPlatforms; //$NON-NLS-1$
 			return getCompleteArgs(archArgs, getVMArguments(L_ARGS_WIN32), fVMArgs[L_ARGS_ARCH_ALL]);
+		} else if (Platform.OS_FREEBSD.equals(os)) {
+			archArgs = archIndex > 0 ? getVMArguments(L_ARGS_FREEBSD, archIndex) + " " + archArgsAllPlatforms : archArgsAllPlatforms; //$NON-NLS-1$
+			return getCompleteArgs(archArgs, getVMArguments(L_ARGS_FREEBSD), fVMArgs[L_ARGS_ARCH_ALL]);
 		} else if (Platform.OS_LINUX.equals(os)) {
 			archArgs = archIndex > 0 ? getVMArguments(L_ARGS_LINUX, archIndex) + " " + archArgsAllPlatforms : archArgsAllPlatforms; //$NON-NLS-1$
 			return getCompleteArgs(archArgs, getVMArguments(L_ARGS_LINUX), fVMArgs[L_ARGS_ARCH_ALL]);
@@ -269,6 +297,10 @@ public class ArgumentsInfo extends ProductObject implements IArgumentsInfo {
 					parentArgs = fProgramArgs;
 					fProgramArgs[L_ARGS_ARCH_ALL] = getText(child).trim();
 					break;
+				case P_PROG_ARGS_FRE:
+					parentArgs = fProgramArgsFre;
+					fProgramArgsFre[L_ARGS_ARCH_ALL] = getText(child).trim();
+					break;
 				case P_PROG_ARGS_LIN:
 					parentArgs = fProgramArgsLin;
 					fProgramArgsLin[L_ARGS_ARCH_ALL] = getText(child).trim();
@@ -284,6 +316,10 @@ public class ArgumentsInfo extends ProductObject implements IArgumentsInfo {
 				case P_VM_ARGS:
 					parentArgs = fVMArgs;
 					fVMArgs[L_ARGS_ARCH_ALL] = getText(child).trim();
+					break;
+				case P_VM_ARGS_FRE:
+					parentArgs = fVMArgsFre;
+					fVMArgsFre[L_ARGS_ARCH_ALL] = getText(child).trim();
 					break;
 				case P_VM_ARGS_LIN:
 					parentArgs = fVMArgsLin;
@@ -338,6 +374,15 @@ public class ArgumentsInfo extends ProductObject implements IArgumentsInfo {
 			writeArchArgs(fProgramArgs, subIndent, writer);
 			writer.println(subIndent + "</" + P_PROG_ARGS + ">"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
+		if (hasArgs(fProgramArgsFre)) {
+			writer.print(subIndent + "<" + P_PROG_ARGS_FRE + ">"); //$NON-NLS-1$ //$NON-NLS-2$
+			if (fProgramArgsFre[L_ARGS_ARCH_ALL].length() > 0) {
+				writer.print(getWritableString(fProgramArgsFre[L_ARGS_ARCH_ALL]));
+			}
+			writer.println();
+			writeArchArgs(fProgramArgsFre, subIndent, writer);
+			writer.println(subIndent + "</" + P_PROG_ARGS_FRE + ">"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
 		if (hasArgs(fProgramArgsLin)) {
 			writer.print(subIndent + "<" + P_PROG_ARGS_LIN + ">"); //$NON-NLS-1$ //$NON-NLS-2$
 			if (fProgramArgsLin[L_ARGS_ARCH_ALL].length() > 0) {
@@ -373,6 +418,15 @@ public class ArgumentsInfo extends ProductObject implements IArgumentsInfo {
 			writer.println();
 			writeArchArgs(fVMArgs, subIndent, writer);
 			writer.println(subIndent + "</" + P_VM_ARGS + ">"); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		if (hasArgs(fVMArgsFre)) {
+			writer.print(subIndent + "<" + P_VM_ARGS_FRE + ">"); //$NON-NLS-1$ //$NON-NLS-2$
+			if (fVMArgsFre[L_ARGS_ARCH_ALL].length() > 0) {
+				writer.print(getWritableString(fVMArgsFre[L_ARGS_ARCH_ALL]));
+			}
+			writer.println();
+			writeArchArgs(fVMArgsFre, subIndent, writer);
+			writer.println(subIndent + "</" + P_VM_ARGS_FRE + ">"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		if (hasArgs(fVMArgsLin)) {
 			writer.print(subIndent + "<" + P_VM_ARGS_LIN + ">"); //$NON-NLS-1$ //$NON-NLS-2$

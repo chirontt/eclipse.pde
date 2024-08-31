@@ -1175,6 +1175,7 @@ public class PDEUIMessages extends NLS {
 	public static String LauncherSection_48Low;
 	public static String LauncherSection_48High;
 	public static String LauncherSection_256High;
+	public static String LauncherSection_freebsdLabel;
 	public static String LauncherSection_linuxLabel;
 	public static String LauncherSection_macLabel;
 	public static String LauncherSection_macBundleUrlTypes_DialogTitle;
