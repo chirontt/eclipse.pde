@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2022 IBM Corporation and others.
+ * Copyright (c) 2006, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -374,6 +374,9 @@ public class ProductExportOperation extends FeatureExportOperation {
 				switch (config[0]) {
 					case "win32": //$NON-NLS-1$
 					images = getWin32Images(info);
+					break;
+				case "freebsd": //$NON-NLS-1$
+					images = getExpandedPath(info.getIconPath(ILauncherInfo.FREEBSD_ICON));
 					break;
 				case "linux": //$NON-NLS-1$
 					images = getExpandedPath(info.getIconPath(ILauncherInfo.LINUX_ICON));
