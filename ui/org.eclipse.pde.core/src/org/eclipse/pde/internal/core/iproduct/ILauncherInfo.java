@@ -19,6 +19,7 @@ import java.util.List;
 
 public interface ILauncherInfo extends IProductObject {
 
+	String FREEBSD_ICON = "freebsdIcon"; //$NON-NLS-1$
 	String LINUX_ICON = "linuxIcon"; //$NON-NLS-1$
 
 	String MACOSX_ICON = "macosxIcon"; //$NON-NLS-1$
