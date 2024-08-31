@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2018 IBM Corporation and others.
+ * Copyright (c) 2010, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License 2.0
@@ -129,7 +129,7 @@ public class PropertiesSection extends TableSection {
 		private final Set<IConfigurationProperty> fExistingProperties;
 
 		private final String[] COMBO_OSLABELS = new String[] { PDEUIMessages.PropertiesSection_All, Platform.OS_LINUX,
-				Platform.OS_MACOSX, Platform.OS_WIN32 };
+				Platform.OS_MACOSX, Platform.OS_WIN32, Platform.OS_FREEBSD };
 		@SuppressWarnings("deprecation")
 		private final String[] COMBO_ARCHLABELS = new String[] { PDEUIMessages.PropertiesSection_All, Platform.ARCH_X86,
 				Platform.ARCH_X86_64 };
