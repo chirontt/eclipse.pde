@@ -325,6 +325,8 @@ public class JNLPGenerator extends DefaultHandler {
 			return "Mac"; //$NON-NLS-1$
 		if ("linux".equalsIgnoreCase(os)) //$NON-NLS-1$
 			return "Linux"; //$NON-NLS-1$
+		if ("freebsd".equalsIgnoreCase(os)) //$NON-NLS-1$
+			return "FreeBSD"; //$NON-NLS-1$
 		if ("solaris".equalsIgnoreCase(os)) //$NON-NLS-1$
 			return "Solaris"; //$NON-NLS-1$
 		if ("hpux".equalsIgnoreCase(os)) //$NON-NLS-1$
